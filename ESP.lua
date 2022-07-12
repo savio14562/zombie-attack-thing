@@ -40,7 +40,8 @@ local function charFunc(char,square,line)
 end
 
 local function playerAdded(plr)
-        local color = plr.Head.Color
+        
+        local color = plr:WaitForChild("Head").Color
         local square = drawing.new("Square")
         square.Visible = true
         square.Transparency = 1
