@@ -40,7 +40,6 @@ local function charFunc(char,square,line)
 end
 
 local function playerAdded(plr)
-        
         local color = plr:WaitForChild("Head").Color
         local square = drawing.new("Square")
         square.Visible = true
@@ -54,17 +53,16 @@ local function playerAdded(plr)
         objects[plr] = {square,line}
 end
 
-workspace.enemies.ChildAdded:Connect(function(thing)
-    playerAdded(thing)
-    local hum = thing:FindFirstChildWhichIsA("Humanoid")
-    hum.HealthChanged:Connect(function()
-        if hum.Health <= 0 then 
-            local square,line = unpack(objects[player])
-            square:Remove()
-            line:Remove()
-            objects[thing] = nil    
-        end 
-    end) 
+workspace.enemies.ChildAdded:Connect(function(thing : Model)
+        playerAdded(thing)
+        local hum = thing:WaitForChild("Humanoid") 
+end)
+
+workspace.enemies.ChildRemoved:Connect(function(thing)
+        local square,line = unpack(objects[thing])
+        square:Remove()
+        line:Remove()
+        objects[thing] = nil
 end)
 
 
