@@ -64,7 +64,7 @@ workspace.enemies.ChildAdded:Connect(function(thing)
             line:Remove()
             objects[thing] = nil    
         end 
-    end 
+    end) 
 end)
 
 
@@ -72,7 +72,7 @@ game:GetService("RunService").RenderStepped:Connect(function(deltaTime)
         for char,shape in pairs(objects) do
                 if char then
                        if char:FindFirstChildWhichIsA("Humanoid") then 
-                          charFunc(plr.Character,unpack(shape)) 
+                          charFunc(char,unpack(shape)) 
                        end 
                 end
         end
